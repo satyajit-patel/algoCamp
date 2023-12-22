@@ -1,1 +1,1 @@
-![alt text](https://www.google.com/url?sa=i&url=https%3A%2F%2Fparade.com%2F1121135%2Fsamuelmurrian%2Fbatman-quotes%2F&psig=AOvVaw0fEZoFzapO0cT5CWh7kSQ_&ust=1703359695930000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCJCB2Mfjo4MDFQAAAAAdAAAAABAD)
+![alt text](https://parade.com/.image/c_limit%2Ccs_srgb%2Cq_auto:good%2Cw_1240/MTkwNTgxMTAwNTY3ODY0NDQ1/batman.webp)
