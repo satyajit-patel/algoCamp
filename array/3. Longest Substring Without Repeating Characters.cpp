@@ -1,25 +1,20 @@
-class Solution {
-public:
-    int lengthOfLongestSubstring(string& s) {
-        int n = s.size();
-        int ans = 0;
+/*
+    Input:
+    S = "geeksforgeeks"
+    Output: 7
+    Explanation: "eksforg" is the longest 
+    substring with all distinct characters.
+*/
 
-        // optimized sliding window using hashing
-        unordered_map<char, int> map;
-        for(int i=0, j=0; j<n; j++) {
-            // update
-            if(map.count(s[j])) {
-                i = max(map[s[j]], i);
-            }
-
-            // work
-            int unique_window_size = j-i+1;
-            ans = max(ans, unique_window_size);
-
-            // insert
-            map[s[j]] = j+1;
+int longestSubstrDistinctChars (string S) {
+    int ans = 0;
+    map<char, int> map;
+    for(int i=0,init=0; i<S.size(); i++) {
+        if(map.find(S[i]) != map.end()) {
+            init = max(init, map[S[i]]);
         }
-
-        return ans;
+        ans = max(ans, i-init+1);
+        map[S[i]] = i+1;
     }
-};
+    return ans;
+}
