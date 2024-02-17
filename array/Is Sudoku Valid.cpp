@@ -1,32 +1,26 @@
-class Solution{
-public:
-    int isValid(vector<vector<int>> mat) {
-        // arrays of set
-        set<int> row[9], col[9];
-        // 2d arrays of set
-        set<int> smallMat[3][3];
+int isValid(vector<vector<int>> mat){
+        set<int> row[9], col[9], subMatrix[3][3];
+        int emptyBlock = 0;
         for(int i=0; i<9; i++) {
             for(int j=0; j<9; j++) {
-                int num = mat[i][j];
-                if(num == 0) {
+                int ele = mat[i][j];
+                if(ele == emptyBlock) {
                     continue;
                 }
+                if(row[i].find(ele) != row[i].end()) {
+                    return 0;
+                }
+                if(col[j].find(ele) != col[j].end()) {
+                    return 0;
+                }
+                if(subMatrix[i/3][j/3].find(ele) != subMatrix[i/3][j/3].end()) {
+                    return 0;
+                }
                 
-                if(row[i].count(num)) {
-                    return false;
-                }
-                if(col[j].count(num)) {
-                    return false;
-                }
-                if(smallMat[i/3][j/3].count(num)) {
-                    return false;
-                }
-                
-                row[i].insert(num);
-                col[j].insert(num);
-                smallMat[i/3][j/3].insert(num);
+                row[i].insert(ele);
+                col[j].insert(ele);
+                subMatrix[i/3][j/3].insert(ele);
             }
         }
-        return true;
+        return 1;
     }
-};

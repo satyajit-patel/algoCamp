@@ -1,44 +1,27 @@
-class Solution {
-public:    
-    long long int maxSumWithK(long long a[], long long n, long long k) {
-        
-        // // O(N^2) TLE
-        // long long maxSum = INT_MIN;
-        // for(long long i=0; i<n; i++) {
-        //     long long curSum = 0;
-        //     for(long long j=i; j<n; j++) {
-        //         curSum += a[j];
-        //         if(j-i+1 >= k && curSum > maxSum) {
-        //             maxSum = curSum;
-        //         }
-        //     }
-        // }
-        // return maxSum;
-        
-        // O(N)
-        long long maxSum = INT_MIN;
-        long long frontSum = 0, backSum = 0;
-        long long i = 0, j = 0;
-        while(i < n && j < n) {
-            frontSum += a[j];
-            long long subarraySize = j-i+1;
-            if(subarraySize < k) {
-                j++;
-            } else if(subarraySize == k) {
-                maxSum = max(maxSum, frontSum);
-                j++;
-            } else if(subarraySize > k) {
-                maxSum = max(maxSum, frontSum);
-                backSum += a[i];
-                i++;
-                if(backSum < 0) {
-                    frontSum -= backSum;
-                    maxSum = max(maxSum, frontSum);
-                    backSum = 0;
+/*
+        n = 4
+        a[] = {1, -2, 2, -3}
+        k = 2
+        Output : 
+        1
+    */
+    
+    long long int maxSumWithK(long long int a[], long long int n, long long int k) {
+        long long maxi = INT_MIN, sum = 0, tempSum = 0;
+        for(long long i=0,init=0; i<n; i++) {
+            sum += a[i];
+            if(i-init+1 == k) {
+                maxi = max(maxi, sum);
+            }
+            else if(i-init+1 > k) {
+                maxi = max(maxi, sum);
+                tempSum += a[init++];
+                if(tempSum < 0) {
+                    sum -= tempSum;
+                    maxi = max(maxi, sum);
+                    tempSum = 0;
                 }
-                j++;
             }
         }
-        return maxSum;
+        return maxi;
     }
-};

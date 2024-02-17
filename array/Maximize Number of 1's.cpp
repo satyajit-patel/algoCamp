@@ -1,20 +1,29 @@
 // m is maximum of number zeroes allowed to flip
     // n is size of array
+    
+    /*
+        Input:
+        N = 3
+        arr[] = {1, 0, 1}
+        M = 1
+        Output:
+        3
+    */
+    
     int findZeroes(int arr[], int n, int m) {
-        // code here
-        int ans = 0;
-        int numOfZero = 0;
-        for(int i=0,j=0; j<n; j++) {
-            if(arr[j] == 0) {
-                numOfZero++;
+        int maxi = 0, num_zero = 0;
+        for(int i=0,init=0; i<n; i++) {
+            if(arr[i] == 0) {
+                num_zero++;
             }
-            while(numOfZero > m && i <= j) {
-                if(arr[i] == 0) {
-                    numOfZero--;
+            
+            while(num_zero > m) {
+                if(arr[init++] == 0) {
+                    num_zero--;
                 }
-                i++;
             }
-            ans = max(ans, j-i+1);
+            
+            maxi = max(maxi, i-init+1);
         }
-        return ans;
+        return maxi;
     }  
