@@ -1,4 +1,15 @@
 // https://www.interviewbit.com/problems/meeting-rooms/
+
+/*
+    Input 1:
+    A = [   [0, 30]
+            [5, 10]
+            [15, 20]
+        ]
+    Output 1:
+    2 
+*/
+
 int Solution::solve(vector<vector<int> > &A) {
     int n = A.size();
     int start[n], end[n];
@@ -13,6 +24,13 @@ int Solution::solve(vector<vector<int> > &A) {
     sort(start, start+n);
     sort(end, end+n);
     
+    /*
+        explanation
+        0, 5, 15
+        i
+        10, 20, 30
+        j 
+    */
     while(i < n && j < n) {
         if(end[j] <= start[i]) {
             numOfRoom--;
