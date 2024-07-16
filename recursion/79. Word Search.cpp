@@ -1,21 +1,28 @@
 class Solution {
 public:
-    vector<vector<char>> grid;
-    string s;
+    /*
+        Input: board = [["A","B","C","E"],
+                        ["S","F","C","S"],
+                        ["A","D","E","E"]], word = "SEE"
+        Output: true
 
-    bool isvalid(int i, int j) {
-        return i>=0 && i<grid.size() && j>=0 && j<grid[0].size();
+        Input: board = [["a"]], word = "a"
+        Output: true
+    */
+
+    int dx[4] = {0, -1, 0, +1};
+    int dy[4] = {-1, 0, +1, 0};
+
+    bool valid(int i, int j, auto& grid) {
+        return i>=0 && i<grid.size() && j >=0 && j<grid[0].size();
     }
 
-    bool state(int i, int j, int index) {
+    bool state(int index, int i, int j, auto& grid, auto& s) {
         // base case
         if(index >= s.size()) {
             return true;
         }
-        if(!isvalid(i, j)) {
-            return false;
-        }
-        if(grid[i][j] == '#') {
+        if(!valid(i, j, grid)) {
             return false;
         }
         if(grid[i][j] != s[index]) {
@@ -23,25 +30,23 @@ public:
         }
 
         // transition
-        char ch = grid[i][j];
+        char dummy = grid[i][j];
         grid[i][j] = '#';
-        bool up = state(i-1, j, index+1);
-        bool down = state(i+1, j, index+1);
-        bool left = state(i, j-1, index+1);
-        bool right = state(i, j+1, index+1);
-        grid[i][j] = ch;
-        bool ans = up || down || left || right;
-        return ans;
+        for(int ind=0; ind<4; ind++) {
+            int ni = i + dx[ind];
+            int nj = j + dy[ind];
+            if(state(index+1, ni, nj, grid, s)) {
+                return true;
+            }
+        }
+        grid[i][j] = dummy;
+        return false;
     }
 
-    bool exist(vector<vector<char>>& board, string word) {
-        int n = board.size();
-        int m = board[0].size();
-        grid.clear(), grid = board;
-        s.clear(), s = word;
-        for(int i=0; i<n; i++) {
-            for(int j=0; j<m; j++) {
-                if(state(i, j, 0)) {
+    bool exist(vector<vector<char>>& board, string& word) {
+        for(int i=0; i<board.size(); i++) {
+            for(int j=0; j<board[0].size(); j++) {
+                if(state(0, i, j, board, word)) {
                     return true;
                 }
             }
