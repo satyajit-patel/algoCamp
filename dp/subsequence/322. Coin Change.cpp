@@ -3,40 +3,41 @@
         Output: 3
         Explanation: 11 = 5 + 5 + 1
 
-        Constraints:
-        1 <= coins.length <= 12
-        1 <= coins[i] <= 231 - 1
-        0 <= amount <= 104
     */
 
-    int state(int i, int amount, auto& A, auto& dp) {
+      class Solution {
+public:
+    vector<vector<int>> dp;
+    int state(int i, int w, vector<int>& a) {
         // base case
-        if(amount == 0) {
+        if(w == 0) {
             return 0;
         }
-        if(amount < 0) {
+        if(i >= a.size()) {
             return 1e9;
         }
-        if(i >= A.size()) {
+        if(w < 0) {
             return 1e9;
         }
-        if(dp[i][amount] != -1) {
-            return dp[i][amount];
+        if(dp[i][w] != -1) {
+            return dp[i][w];
         }
 
         // transition
-        int take = 1 + state(i, amount-A[i], A, dp);
-        int notTake = state(i+1, amount, A, dp);
-        int ans = min(take, notTake);
-        dp[i][amount] = ans;
+        int take = 1 + state(i, w-a[i], a);
+        int notTake = state(i+1, w, a);
+
+        int ans = std::min(take, notTake);
+        dp[i][w] = ans;
         return ans;
     }
 
     int coinChange(vector<int>& coins, int amount) {
-        vector<vector<int>> dp(coins.size()+1, vector<int>(amount+1, -1));
-        int ans = state(0, amount, coins, dp);
+        dp.resize(coins.size()+1, vector<int>(amount+1, -1));
+        int ans = state(0, amount, coins);
         if(ans >= 1e9) {
             return -1;
         }
         return ans;
     }
+};
