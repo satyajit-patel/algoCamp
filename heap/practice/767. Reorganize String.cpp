@@ -1,18 +1,3 @@
-class compClass {
-public:
-    /*
-        vector,set => a.first > b.first gives descending order
-        heap => a.first < b.first gives descending order
-        i.e the sign changes as vector,set is linear data structure and heap is tree
-    */
-    bool operator()(const pair<int, char>& a, const pair<int, char>& b) const {
-        if(a.first == b.first) {
-            return a.second > b.second;
-        }
-        return a.first < b.first;
-    }
-};
-
 class Solution {
 public:
     string reorganizeString(string& s) {
@@ -20,7 +5,8 @@ public:
         for(auto& it : s) {
             mp[it]++;
         }
-        priority_queue<pair<int, char>, vector<pair<int, char>>, compClass> maxHeap;
+        
+        priority_queue<pair<int, char>, vector<pair<int, char>>> maxHeap;
         for(auto& it : mp) {
             maxHeap.push({it.second, it.first});
         }
