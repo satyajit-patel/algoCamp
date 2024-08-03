@@ -18,12 +18,11 @@
 	        
 	        ele & 1 == 0            => even
 	        ele & (ele-1) == 0      => power of 2
-	        // (ele >> k) & 1 == 1  => kth bit is set
-	        ele & (1 << k) == 1     => kth bit is set
+	        ele & (1<<k) == 1       => kth bit is set
 	        
-	        ele ^ (1 << k)          => toggles the kth bit
-	        ele | (1 << k)          => sets the kth bit
-	        ele & ~(1 << k)         => unsets the kth bit
+	        ele ^ (1<<k)          => toggles the kth bit
+	        ele | (1<<k)          => sets the kth bit
+	        ele & ~(1<<k)         => unsets the kth bit
 	    */
 	    
 	    long long ans = 0;

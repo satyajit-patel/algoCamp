@@ -1,7 +1,7 @@
 class Solution{
 public:
     bool f(int N) {
-        if(N == 1) {
+        if(N <= 1) {
             return false;
         }
         for(int i=2; i*i<=N; i++) {
@@ -9,6 +9,7 @@ public:
                 return false;
             }
         }
+
         return true;
     }
 

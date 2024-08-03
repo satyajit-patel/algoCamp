@@ -1,34 +1,34 @@
-struct compClass {
-    bool operator()(const pair<int, int>& a, const pair<int, int>& b) const {
-        if(a.first == b.first) {
-            // big value at front
-            return a.second > b.second;
-        }
-        return a.first < b.first;
-    }
-};
-
 class Solution {
 public:
-    vector<int> frequencySort(vector<int>& nums) {
-        map<int, int> mp;
-        for(auto& it: nums) {
-            mp[it]++;
-        }
+    /*
+        Input: 
+            colors = [0,1,0,1,0], // circular
+            k = 3
+        Output: 
+            3
+        explanation
+            as k = 3 so it will circulate upto
+            0 1 0 1 0 - 0 0 1
 
-        vector<pair<int, int>> arr; // freq, ele
-        for(auto& it: mp) {
-            arr.push_back({it.second, it.first});
-        }
+    */
 
-        std::sort(arr.begin(), arr.end(), compClass());
+    int numberOfAlternatingGroups(vector<int>& colors, int k) {
+        int ans = 0;
+        int n = colors.size();
+        vector<int> a = colors;
+        a.insert(a.end(), a.begin(), a.end());
 
-        vector<int> ans;
-        for(auto& it: arr) {
-            int freq = it.first;
-            int value = it.second;
-            while(freq--) {
-                ans.push_back(value);
+        // feels like sliding window but not sliding window
+        int size = 1;
+        for(int i=1; i<n+(k-1); i++) {
+            if(a[i] != a[i-1]) {
+                size++;
+            } else {
+                size = 1;
+            }
+            
+            if(size >= k) {
+                ans++;
             }
         }
 

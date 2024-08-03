@@ -1,11 +1,21 @@
 class Solution {
 public:
-    string maximumOddBinaryNumber(string& s) {
-        int n = s.size();
+    /*
+        Input: s = "010"
+        Output: "001"
+
+        Input: s = "0101"
+        Output: "1001"
+    */
+
+    string maximumOddBinaryNumber(string s) {
+        // observation a num is odd if it's last bit is odd
         std::sort(s.begin(), s.end());
         std::reverse(s.begin(), s.end());
-        int i = s.find_last_of('1');
-        std::swap(s[i], s[n-1]);
+
+        int index = s.find_last_of('1'); 
+        std::swap(s[index], s[s.size()-1]);
+
         return s;
     }
 };

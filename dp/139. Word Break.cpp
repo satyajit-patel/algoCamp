@@ -1,3 +1,11 @@
+/*
+    Input: 
+        s = "leetcode", wordDict = ["leet","code"]
+    Output: 
+        true
+    Explanation: 
+        Return true because "leetcode" can be segmented as "leet code".
+*/
 class Solution {
 public:
     vector<int> dp;
@@ -21,7 +29,7 @@ public:
         return dp[i] = false;
     }
 
-    bool wordBreak(string& s, vector<string>& wordDict) {
+    bool wordBreak(string s, vector<string>& wordDict) {
         set<string> st(wordDict.begin(), wordDict.end());
         dp.resize(s.size()+1, -1);
         bool ans = state(0, s, st);

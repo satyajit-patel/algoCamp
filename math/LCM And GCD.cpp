@@ -12,8 +12,8 @@ public:
     }
 
     vector<long long> lcmAndGcd(long long A , long long B) {
+	long long gcd = getGcd(A, B);
         long long lcm = getLcm(A, B);
-        long long gcd = getGcd(A, B);
         return {lcm, gcd};
     }
 };

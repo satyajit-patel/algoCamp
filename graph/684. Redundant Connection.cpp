@@ -1,32 +1,47 @@
 class DSU {
 private:
-    vector<int> parent, height;
+    vector<int> parent;
 public:
     DSU(int n) {
         parent.resize(n, -1);
-        height.resize(n, -1);
     }
-    int findParent(int x) {
-        if(parent[x] == -1) return x;
-        return parent[x] = findParent(parent[x]);
-    }
-    void merge(int u, int v) {
-        int x = findParent(u);
-        int y = findParent(v);
-        if(x == y) return;
 
-        parent[std::max(x, y)] = std::min(x, y); 
+    int findParent(int node) {
+        if(parent[node] == -1) {
+            return node;
+        }
+        // keep updating parent
+        return parent[node] = findParent(parent[node]); 
+    }
+
+    void merge(int u, int v) {
+        int nu = findParent(u);
+        int nv = findParent(v);
+        if(nu == nv) {
+            return;
+        }
+        parent[std::max(nu, nv)] = std::min(nu, nv);
     }
 };
 
 class Solution {
 public:
-    // 684. Redundant Connection
-    vector<int> findRedundantConnection(vector<vector<int>>& edges) {
-        int n = edges.size();
-        vector<int> ans;
+    /*
+            A
+        1---------2
+        |      .
+    B   |   . C
+        | .
+        3
 
+        so connection "C" is redundant here
+    */
+
+    vector<int> findRedundantConnection(vector<vector<int>>& edges) {
+        vector<int> ans;
+        int n = edges.size();
         DSU* dsu = new DSU(n+1);
+
         for(auto& row: edges) {
             int u = row[0];
             int v = row[1];

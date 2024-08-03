@@ -21,12 +21,16 @@ public:
         // return false;
 
         /*
+		8/4 here 4 is divisor and 8 is dividend
+
             concept:
                 interesting fact:
                 let n1 % k = reminder1
-                now if we add any multiple of k in n1
-                it will result the same reminder i.e whatever sum we got to add extra in "n1"
-                that sum must ne a multiple/divisible of k
+                now if we add any dividend of k in n1
+                it will result the same reminder 
+
+		i.e whatever sum we got to add extra in "n1"
+                that sum must be a dividend of k
                 example
                     (1) % 4 = 1
                     (1+4) % 4 = 1
@@ -36,7 +40,7 @@ public:
                     (1+2) % 4 = 2
                     (1+2+6) % 4 = 1 (now we have seen this reminder before)
                     so what ever extra sum(2+6) we added in initial num(1) that sum
-                    must have been a multiple of k
+                    must have been a dividend of k
 
         */
         map<int, int> map;
