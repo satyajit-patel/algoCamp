@@ -1,0 +1,88 @@
+select 
+  from
+  where
+      group by
+      having
+	  order by
+	  limit
+Operators:
+  Symbols:
+	and, or, not
+	=, <, <=, >, >=, !=(<>)
+	between  => checks value within range
+	like     => checks value if matches pattern
+	is null  => checks value is null or not
+	in	 => checks value is present or not
+	distinct => only unique values
+	
+	ex:
+	select * 
+	  from emp 
+	  where salary between 10000 and 20000;
+			//
+	  where salary >= 10000 and salary <= 20000;
+	
+	select * 
+	  from  emp
+	  where first_name like 'Arpita'; // Arpita
+			// or
+	  where first_name like 'A%'; // Arpita, Amit, Amul  
+			//
+	  where first_name like '%i%; // Arpita, Amit
+	
+	select *
+  	  from emp
+	  where salary in (10000, 15000, 20000);
+
+	select distinct last_name
+	  from emp;
+  Functions:
+	avg()    => returns avg value
+	count()  => returns #rows
+	max()    => returns largest value
+	min() 	 => returns lowest value
+	sum()	 => returns sum of all values
+	length() => returns size of string
+
+	ex:
+	select avg(salary) as sal_avg
+	  from emp; // will return 1 col 1 row
+
+	select count(*)
+	  from emp;
+
+	select max(salary)
+	  from emp;
+
+khupiaPolice____________________________________
+	emp_id | first_name | salary | dept_id |
+_______________|____________|________|_________|
+	 007      Bond	       10K     1
+	 008 	  xxx	       20k     2
+	 009      hunt         20k     1
+         010      mib          10k     2
+
+	select sum(salary) as tot_money, dept_id
+	  from khupiaPolice
+	  where salary >= 10k
+	    group by dept_id
+	    having count(dept_id) >= 2
+	    order by dept_id desc;
+       ____________________
+	tot_money | dept_id
+       ___________|________
+	 30k         2
+         30k         1
+
+___________________________________________________
+
+union     => combines distinct output of select statements
+union all => combines all output of select statements
+
+ex:
+select product
+  from prod1 // apple, samsung, apple
+union
+select product
+  from prod2; // onePlus, sony
+// apple, samsung, onePlus, sony   
