@@ -7,7 +7,7 @@ using namespace std;
 #define vvi vector<vector<int>>
 // ----------------------------------------------------------
 /*
-	
+	https://codeforces.com/problemset/problem/1343/C
 */
 
 bool sign(int num) {
