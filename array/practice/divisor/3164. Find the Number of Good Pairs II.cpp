@@ -13,13 +13,14 @@ public:
         The 2 good pairs are (3, 0) and (3, 1). // 0 based indexing
 
         dry run
+	nums2 =[(2*k), (4*k)]
         now in nums1
         12 is divisible by 6 (3, 0)
         12 is divisible by 12 (3 1)
 
         i.e. nums2 becomes nums2[6, 12]
-        now we have find the another numbers which gets divided by nums2[i]
-        like for 6 -> 6, 12 18, 24, 30... (so foe all this num.. 6 is divisor)
+        now we have to find the another numbers which gets divided by nums2[i]
+        like for 6 -> 6, 12 18, 24, 30... (so for all this num.. 6 is divisor)
     */
 
     int mp[1000000+1];
@@ -58,13 +59,10 @@ public:
 
     long long numberOfPairs(vector<int>& nums1, vector<int>& nums2, int k) {
         long long ans = 0;
-        // nums1[i] % nums2[i] == 0;
-
         preCompute(nums2, k);
         for(auto& it: nums1) {
             ans += dividend[it];
         }
-
         return ans;
     }
 };
