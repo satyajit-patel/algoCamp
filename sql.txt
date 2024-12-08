@@ -85,4 +85,60 @@ select product
 union
 select product
   from prod2; // onePlus, sony
-// apple, samsung, onePlus, sony   
+// apple, samsung, onePlus, sony  
+
+
+// find 2nd max mark in a table
+select max(markCol)
+	from student
+	where markCol < (select max(markCol) from student);
+
+-------------------------------------------------------------------------------------
+
+Databases will give you an organised way to store and retrive data easily.
+
+User <-> DBMS <-> Database
+
+RDBMS(Databases which implement SQL in them)
+	RDBMS is a collection of Databases with following properties: 
+		=> Follows SQL standards
+		=> Stores data in Table format
+		=> ACID compliance
+	
+	SQL is the NCRT(standard book) and 
+	MySQL, PgSQL etc are private authors(which add some flavours(own explanation) yet concept is same).
+	So the of MySQL may differ from PgSQL
+
+	MySQL Server(Port 3306)
+	Microsoft SQL Server
+	Aurora(By Amazon)
+	PostgreSQL(PgSQL)
+	MariaDB
+	Oracle
+
+Cloud Database as a Service
+	Amazon RDS
+	MongoDB Atlas
+
+NoSQL distributed databases for parallel computing
+	Apache Hadoop
+	Apache Spark
+
+NoSQL(Not Only SQL)(who do not support SQL like query)
+	MongoDB(JSON(Javascript Object Notation) Document format)
+	Redis(Key Value format)
+	Apache Cassandra
+	Neo4j(Graph format)
+	DynamoDB(By Amazon)
+
+"We ought to walk through the rooms of our lives 
+not looking for flaws, but looking for potential.” 
+~ Ellen Goodman
+
+A foreign key is a column in a table that refers to the primary key of another table.
+PK -> unique, not null, only one.
+FK -> can have duplicate and null values, the could be multiple FKs in a table.
+
+A candidate key is a column in a table that uniquely identifies each record, much like a primary key. 
+When this candidate key is used in another table as a foreign key, it establishes a relationship between the two tables.
+So, Yes, a candidate key can be used as a foreign key in another table within a relational database. 
