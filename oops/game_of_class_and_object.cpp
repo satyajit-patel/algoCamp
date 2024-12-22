@@ -652,3 +652,62 @@ Friend class and Friend function :
    3) Friendship is not inherited.
    4) The concept of friends is not there in Java.
 */
+
+
+
+/*
+In C++, you need the scope resolution operator (::) to access a nested class from outside the outer class 
+unless you are inside a member function of the outer class itself. If you're inside the outer class, 
+you can directly refer to the nested class without using the scope resolution operator.
+
+Here’s an example demonstrating both approaches and using the new keyword to create an object:
+
+cpp
+Copy code
+#include <iostream>
+using namespace std;
+
+class Outer {
+public:
+    class Inner { // Nested class
+    public:
+        void display() {
+            cout << "Hello from the Inner class!" << endl;
+        }
+    };
+
+    // Function inside Outer to access Inner class
+    void createInnerObject() {
+        Inner* innerObj = new Inner();
+        innerObj->display();
+        delete innerObj; // Clean up
+    }
+};
+
+int main() {
+    // Accessing using the scope resolution operator
+    Outer::Inner* innerObj1 = new Outer::Inner();
+    innerObj1->display();
+    delete innerObj1; // Clean up
+
+    // Accessing from within a member function of Outer
+    Outer outerObj;
+    outerObj.createInnerObject();
+
+    return 0;
+}
+Key Points:
+Scope Resolution Operator (::):
+When creating the object of the Inner class outside the Outer class, you must use the Outer::Inner syntax.
+Direct Access Within the Outer Class:
+Inside a member function of the Outer class, you can directly create an Inner object without using the Outer:: prefix.
+Output:
+
+javascript
+Copy code
+Hello from the Inner class!
+Hello from the Inner class!
+Usage of new:
+Objects of the nested class are dynamically allocated using new in both cases. 
+Ensure proper cleanup using delete to avoid memory leaks.
+*/
